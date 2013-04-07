@@ -10,17 +10,17 @@ import java.awt.event.KeyListener;
 public class Rocket
 {
     private int rocketXPos = 500;
-    private int rocketYPos = 500;                    
-    private int fasterThenSpeedLimitX = 0;
-    private int fasterThenSpeedLimitY = 0;
+    private int rocketYPos = 500;
+    private int fasterThenSpeedLimitX = 0;// this is delta x
+    private int fasterThenSpeedLimitY = 0;// this is delta y
     private int directionToCrashSite;
+    private int fasterThenSpeedLimit = 0;
     int[] xPos =
     {
-        -10, 12, 15, 0, 10, 10, 12, 12, 10, 10, 10, 12, 12, 10, 10, 0, -5, -5, -2
-    };
+        0, 4, 4, 5, 5, 10, 5, 5, 4, 4, -4, -4, -5, -5, -10, -5, -5, -4, -4 };
     int[] yPos =
-    {
-        -0, -5, -5, -6, -5, -10, -5, -5, -4, -4, -0, 4, 4, 5, 5, 10, 5, 5, -4
+             {
+        -10, -2, -5, -5, 0, 10, 10, 12, 12, 10, 10, 12, 12, 10, 10, 0, -5 ,-5, -2
     };
     Polygon uncontrolableRide = new Polygon(xPos, yPos, yPos.length);
 
@@ -34,8 +34,7 @@ public class Rocket
         g2.setColor(Color.white);
         g2.setStroke(new BasicStroke(.1f));
         g2.rotate(Math.toRadians(directionToCrashSite));
-        g2.drawPolygon(uncontrolableRide); 
-        rocketXPos = rocketXPos + fasterThenSpeedLimitX;
+        g2.drawPolygon(uncontrolableRide);
         if (rocketXPos > 1500)
         {
             rocketXPos = 0;
@@ -48,7 +47,10 @@ public class Rocket
 
     public void moveSelf()
     {
-        
+        fasterThenSpeedLimitX = (int) (fasterThenSpeedLimit * Math.sin(directionToCrashSite));
+        rocketXPos = fasterThenSpeedLimitX + rocketXPos;
+        fasterThenSpeedLimitY = (int) (fasterThenSpeedLimit * -Math.cos(directionToCrashSite));
+        rocketYPos = fasterThenSpeedLimitY + rocketYPos;
     }
 
     public void setFasterThenSpeedLimitX(int fasterThenSpeedLimitX)
