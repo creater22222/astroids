@@ -10,12 +10,12 @@ public class ThingThatDrivesYouToYourDeath
 {
     int width = Toolkit.getDefaultToolkit().getScreenSize().width;
     int height = Toolkit.getDefaultToolkit().getScreenSize().height;
-    private int rocketXPos = 500;
-    private int rocketYPos = 500;
+    private double rocketXPos = 500;
+    private double rocketYPos = 500;
     private double fasterThenSpeedLimitX = 0;// this is delta x
     private double fasterThenSpeedLimitY = 0;// this is delta y
-    private int directionToCrashSite;
-    private int fasterThenSpeedLimit = 0;
+    private double directionToCrashSite;
+    private double fasterThenSpeedLimit = 0;
     int[] xPos =
     {
         0, 4, 4, 5, 5, 10, 5, 5, 4, 4, -4, -4, -5, -5, -10, -5, -5, -4, -4
@@ -29,8 +29,8 @@ public class ThingThatDrivesYouToYourDeath
     public void paintSelf(Graphics2D g2)
     {
         g2.setColor(Color.red);
-        g2.drawString("direction = " + directionToCrashSite, 1800, 100);
-        g2.drawString("speed = " + fasterThenSpeedLimit, 1800, 200);
+        g2.drawString("direction = " + (int)directionToCrashSite, 1800, 100);
+        g2.drawString("speed = " + (int)fasterThenSpeedLimit, 1800, 200);
         g2.translate(rocketXPos, rocketYPos);
         g2.scale(10, 10);
         g2.setColor(Color.cyan);
@@ -58,47 +58,47 @@ public class ThingThatDrivesYouToYourDeath
     public void moveSelf()
     {
         fasterThenSpeedLimitX = getFasterThenSpeedLimit() * Math.sin(Math.toRadians(directionToCrashSite));
-        rocketXPos = (int) (fasterThenSpeedLimitX + rocketXPos);
+        rocketXPos = fasterThenSpeedLimitX + rocketXPos;
         fasterThenSpeedLimitY = getFasterThenSpeedLimit() * -Math.cos(Math.toRadians(directionToCrashSite));
-        rocketYPos = (int) (fasterThenSpeedLimitY + rocketYPos);
+        rocketYPos = fasterThenSpeedLimitY + rocketYPos;
     }
 
-    public void setFasterThenSpeedLimitX(int fasterThenSpeedLimitX)
+    public void setFasterThenSpeedLimitX(double fasterThenSpeedLimitX)
     {
         this.fasterThenSpeedLimitX = fasterThenSpeedLimitX;
     }
 
-    public void setFasterThenSpeedLimitY(int fasterThenSpeedLimitY)
+    public void setFasterThenSpeedLimitY(double fasterThenSpeedLimitY)
     {
         this.fasterThenSpeedLimitY = fasterThenSpeedLimitY;
     }
 
-    public void setDirectionToCrashSite(int directionToCrashSite)
+    public void setDirectionToCrashSite(double directionToCrashSite)
     {
         this.directionToCrashSite = directionToCrashSite;
     }
 
-    public int getFasterThenSpeedLimitX()
+    public double getFasterThenSpeedLimitX()
     {
-        return (int) fasterThenSpeedLimitX;
+        return fasterThenSpeedLimitX;
     }
 
-    public int getFasterThenSpeedLimitY()
+    public double getFasterThenSpeedLimitY()
     {
         return (int) fasterThenSpeedLimitY;
     }
 
-    public int getDirectionToCrashSite()
+    public double getDirectionToCrashSite()
     {
         return directionToCrashSite;
     }
 
-    public int getFasterThenSpeedLimit()
+    public double getFasterThenSpeedLimit()
     {
         return fasterThenSpeedLimit;
     }
 
-    public void setFasterThenSpeedLimit(int fasterThenSpeedLimit)
+    public void setFasterThenSpeedLimit(double fasterThenSpeedLimit)
     {
         this.fasterThenSpeedLimit = fasterThenSpeedLimit;
     }
